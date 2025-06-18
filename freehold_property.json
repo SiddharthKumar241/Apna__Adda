@@ -1,0 +1,92 @@
+[
+  {
+    "city": "Delhi",
+    "title": "Freehold Plot near Metro Station",
+    "type": "Freehold_Property",
+    "rent": 2500000,
+    "dateAdded": "2025-05-01",
+    "area": "500 sq.ft",
+    "image": "assets/fh1.jpeg"
+  },
+  {
+    "city": "Mumbai",
+    "title": "Freehold Land in Mumbai Suburbs",
+    "type": "Freehold_Property",
+    "rent": 4500000,
+    "dateAdded": "2025-04-20",
+    "area": "700 sq.ft",
+    "image": "assets/fh2.jpeg"
+  },
+  {
+    "city": "Bangalore",
+    "title": "Freehold Plot near Tech Park",
+    "type": "Freehold_Property",
+    "rent": 3200000,
+    "dateAdded": "2025-03-15",
+    "area": "600 sq.ft",
+    "image": "assets/fh3.jpeg"
+  },
+  {
+    "city": "Chennai",
+    "title": "Residential Freehold Property",
+    "type": "Freehold_Property",
+    "rent": 2800000,
+    "dateAdded": "2025-01-10",
+    "area": "550 sq.ft",
+    "image": "assets/fh3.jpeg"
+  },
+  {
+    "city": "Hyderabad",
+    "title": "Secure Freehold Land in Hyderabad",
+    "type": "Freehold_Property",
+    "rent": 3000000,
+    "dateAdded": "2025-02-18",
+    "area": "650 sq.ft",
+    "image": "assets/fh5.jpeg"
+  },
+  {
+    "city": "Pune",
+    "title": "Freehold Plot in Prime Area",
+    "type": "Freehold_Property",
+    "rent": 2700000,
+    "dateAdded": "2025-04-05",
+    "area": "520 sq.ft",
+    "image": "assets/ip1.jpeg"
+  },
+  {
+    "city": "Ahmedabad",
+    "title": "Freehold Property near Expressway",
+    "type": "Freehold_Property",
+    "rent": 2400000,
+    "dateAdded": "2025-03-25",
+    "area": "530 sq.ft",
+    "image": "assets/faa2.jpeg"
+  },
+  {
+    "city": "Kolkata",
+    "title": "Freehold Land with Government Approval",
+    "type": "Freehold_Property",
+    "rent": 2600000,
+    "dateAdded": "2025-05-05",
+    "area": "580 sq.ft",
+    "image": "assets/authority.jpeg"
+  },
+  {
+    "city": "Lucknow",
+    "title": "Freehold Land with Road Access",
+    "type": "Freehold_Property",
+    "rent": 2300000,
+    "dateAdded": "2025-02-28",
+    "area": "510 sq.ft",
+    "image": "assets/fh2.jpeg"
+  },
+  {
+    "city": "Chandigarh",
+    "title": "Premium Freehold Plot in Sector Area",
+    "type": "Freehold_Property",
+    "rent": 3100000,
+    "dateAdded": "2025-04-15",
+    "area": "600 sq.ft",
+    "image": "assets/ap1.jpg"
+  }
+]

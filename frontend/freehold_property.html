@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Freehold Property</title>
+  <link rel="shortcut icon" href="../assets/property.png" type="image/x-icon" />
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@1" rel="stylesheet" />
+
+  <style>
+    :root {
+      --color-muted: #a4a4a4;
+      --color-text: #2b2d29;
+      --color-theme: #9bd6a6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f0f0f0;
+      padding-bottom: 60px;
+      color: var(--color-text);
+    }
+
+    h1 {
+      text-align: center;
+      margin: 40px 0 10px;
+      color: #2f4f4f;
+      font-size: 2.2rem;
+    }
+
+    #listings {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 40px;
+      padding: 40px 20px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .listing-card {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      background: #ffffff;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+      border-radius: 28px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .listing-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    .listing-card img {
+      position: absolute;
+      inset: 8px;
+      width: calc(100% - 16px);
+      height: calc(100% - 16px);
+      object-fit: cover;
+      border-radius: 20px;
+      z-index: 0;
+      filter: brightness(1.05) contrast(1.05);
+    }
+
+    .listing-card .content {
+      position: relative;
+      z-index: 1;
+      padding: 200px 24px 24px;
+      background: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.15) 60%);
+      color: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      border-radius: inherit;
+    }
+
+    .listing-card h3 {
+      font-size: 1.7rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .listing-card p {
+      margin: 4px 0;
+      font-size: 1rem;
+      color: #e6e6e6;
+    }
+
+    .rent {
+      color: var(--color-theme);
+      font-weight: 600;
+      margin-top: 10px;
+    }
+
+    .posted {
+      font-size: 0.9rem;
+      font-style: italic;
+      color: #ccc;
+      margin-top: 8px;
+    }
+
+    .details {
+      display: flex;
+      gap: 16px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .detail-item {
+      display: flex;
+      align-items: center;
+      font-size: 0.95rem;
+      gap: 6px;
+      color: #e0e0e0;
+    }
+
+    .material-symbols-outlined {
+      font-size: 18px;
+      color: #ccc;
+    }
+
+    .back-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 8px 16px;
+      background-color: #b5ddb9;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease;
+      z-index: 10;
+    }
+
+    .back-btn:hover {
+      background-color: #a0ccaa;
+    }
+
+    @media (min-width: 640px) {
+      .listing-card {
+        flex-direction: row;
+        padding: 16px;
+        max-height: 380px;
+      }
+
+      .listing-card img {
+        position: static;
+        height: 100%;
+        width: 55%;
+        margin-left: -40px;
+        object-fit: cover;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+      }
+
+      .listing-card .content {
+        flex: 1;
+        padding: 0 24px;
+        background: transparent;
+        color: var(--color-text);
+      }
+
+      .listing-card h3,
+      .listing-card p,
+      .listing-card .rent,
+      .listing-card .posted,
+      .listing-card .detail-item {
+        color: var(--color-text);
+      }
+
+      .material-symbols-outlined {
+        color: #555;
+      }
+  }
+  html, body, * {
+  cursor: url("../assets/icons8-cursor-32.png"), auto !important;
+}
+
+*::before,
+*::after {
+  cursor: url("../assets/icons8-cursor-32.png"), auto !important;
+}
+
+  </style>
+</head>
+<body>
+  <h1>Freehold Property Listings</h1>
+
+  <button class="back-btn" onclick="history.back()">← Back</button>
+
+  <div id="listings"></div>
+
+  <script>
+    fetch('/freehold-property')
+      .then(response => response.json())
+      .then(data => {
+        const listingsContainer = document.getElementById('listings');
+        data.forEach(listing => {
+          const card = document.createElement('div');
+          card.classList.add('listing-card');
+
+          card.innerHTML = `
+            <img src="/${listing.image}" alt="${listing.title}" />
+            <div class="content">
+              <h3>${listing.title}</h3>
+              <p class="rent">Rent: ₹${listing.rent}</p>
+              <p class="posted">Added on: ${listing.dateAdded || 'N/A'}</p>
+              <div class="details">
+                <span class="detail-item">
+                  <span class="material-symbols-outlined"> location_on </span>
+                  ${listing.city || listing.location || 'Not Specified'}
+                </span>
+                <span class="detail-item">
+                  <span class="material-symbols-outlined"> domain </span>
+                  ${listing.type || 'Freehold'}
+                </span>
+              </div>
+            </div>
+          `;
+
+          listingsContainer.appendChild(card);
+        });
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  </script>
+</body>
+</html>

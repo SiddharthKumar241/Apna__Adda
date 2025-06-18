@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login Failed | Apna Adda</title>
+  <meta http-equiv="refresh" content="5;url=login.html" />
+  <link rel="shortcut icon" href="../assets/cross.png" type="image/x-icon">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #98c79c, #b8e0bc, #e6ffe7);
+      background-size: 200% 200%;
+      animation: bgMove 8s ease infinite;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .glass-card {
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(14px);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  padding: 40px 30px;
+  width: 90%;
+  max-width: 420px;
+  text-align: center;
+  color: #222;
+  position: relative;
+  animation: float 3s ease-in-out infinite;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .emoji {
+      font-size: 50px;
+      margin-bottom: 20px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .glass-card h1 {
+      color: #b00020;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .glass-card p {
+      font-size: 16px;
+      margin-bottom: 25px;
+      color: #222;
+    }
+
+    .glass-card a {
+      background-color: #98c79c;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+      display: inline-block;
+    }
+
+    .glass-card a:hover {
+      background-color: #7aaa7f;
+    }
+
+    .redirect-note {
+      margin-top: 15px;
+      font-size: 13px;
+      color: #333;
+    }
+
+    .logo {
+      width: 140px;
+      max-width: 160px;
+      margin-bottom: 25px;
+      filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.35));
+      animation: pulse 3s infinite ease-in-out;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    html, body, * {
+  cursor: url("../assets/icons8-cursor-32.png"), auto !important;
+}
+
+*::before,
+*::after {
+  cursor: url("../assets/icons8-cursor-32.png"), auto !important;
+}
+
+  </style>
+</head>
+<body>
+  <div class="glass-card">
+    <img src="../assets/logo.png" alt="Apna Adda Logo" class="logo" />
+    <div class="emoji">😓</div>
+    <h1>Login Failed</h1>
+    <p>Oops! Wrong password or email. Please try again.</p>
+    <a href="login.html">Try Again</a>
+    <div class="redirect-note">Redirecting you in 5 seconds...</div>
+  </div>
+</body>
+</html>

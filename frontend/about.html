@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Apna Adda - Your Trusted Property Partner</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, #f0f0f0 20%, #d7e8d7 100%);
+      color: #2c3e50;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
+    }
+    .bigContainer {
+      max-width: 1320px;
+      margin: 60px auto 40px;
+      padding: 0 30px;
+    }
+    .Container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+    .imgContainer {
+      position: relative;
+      width: 48%;
+      max-width: 450px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow:
+        0 15px 30px rgba(122, 170, 122, 0.4),
+        0 20px 50px rgba(122, 170, 122, 0.25);
+      perspective: 1000px;
+      transition: box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .imgContainer:hover {
+      box-shadow:
+        0 20px 40px rgba(122, 170, 122, 0.7),
+        0 30px 70px rgba(122, 170, 122, 0.4);
+    }
+    .blueDots {
+      position: absolute;
+      top: 30px;
+      right: 15%;
+      width: 80%;
+      height: auto;
+      object-fit: contain;
+      opacity: 0.3;
+      pointer-events: none;
+      user-select: none;
+      will-change: transform;
+      transition: transform 0.2s ease-out;
+      filter: drop-shadow(0 0 8px #7aaa7a) brightness(1.2) saturate(1.5);
+      background: linear-gradient(45deg, #629962 0%, #91b291 100%);
+      border-radius: 20px;
+      mix-blend-mode: screen;
+    }
+    .mainImg {
+      width: 100%;
+      height: 700px;
+      object-fit: cover;
+      border-radius: 20px;
+      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.3s ease;
+      box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    .mainImg:hover,
+    .mainImg:focus-visible {
+      outline: none;
+      transform: scale(1.05) rotateY(8deg);
+      box-shadow:
+        0 20px 40px rgba(122, 170, 122, 0.7),
+        0 30px 80px rgba(122, 170, 122, 0.5);
+      filter: drop-shadow(0 0 12px #7aaa7a);
+    }
+    .textSide {
+      width: 48%;
+      min-width: 320px;
+      animation: fadeSlideIn 1s ease forwards;
+      opacity: 0;
+      transform: translateX(-50px);
+      padding: 2.5rem 3rem;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #70aa70 0%, #9cc49c 100%);
+      box-shadow: 0 12px 40px rgba(122, 170, 122, 0.4);
+      color: #fff;
+      position: relative;
+      z-index: 10;
+      user-select: none;
+      transition: background 0.4s ease;
+    }
+    .textSide.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .heading {
+      font-size: 3.25rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+      position: relative;
+      cursor: default;
+    }
+    .heading::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 0;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.75);
+      border-radius: 5px;
+      transition: width 0.5s ease;
+      will-change: width;
+    }
+    .heading:hover::after,
+    .heading:focus-visible::after {
+      width: 100%;
+      outline: none;
+    }
+    .subHeading {
+      font-size: 1.125rem;
+      color: #e8f0e8;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+      opacity: 0;
+      animation: fadeInText 1.2s ease forwards;
+      animation-delay: 0.5s;
+    }
+    .explore {
+      display: inline-block;
+      background: linear-gradient(45deg, #6ea46e, #7aaa7a);
+      color: white;
+      font-weight: 700;
+      font-size: 1.25rem;
+      padding: 20px 60px;
+      border-radius: 40px;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow:
+        0 10px 25px rgba(122, 170, 122, 0.7);
+      transition: box-shadow 0.3s ease, background 0.3s ease, transform 0.3s ease;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+      outline-offset: 4px;
+    }
+    .explore:hover,
+    .explore:focus-visible {
+      background: linear-gradient(45deg, #7aaa7a, #629962);
+      box-shadow:
+        0 15px 30px rgba(122, 170, 122, 0.9),
+        0 0 12px rgba(122, 170, 122, 0.9);
+      outline: none;
+      transform: translateY(-5px);
+      animation: shine 2.5s infinite ease-in-out;
+    }
+    @keyframes shine {
+      0%, 100% {
+        box-shadow:
+          0 15px 30px rgba(122, 170, 122, 0.9),
+          0 0 12px rgba(122, 170, 122, 0.9);
+      }
+      50% {
+        box-shadow:
+          0 20px 40px rgba(122, 170, 122, 1),
+          0 0 20px rgba(122, 170, 122, 1);
+      }
+    }
+    .creatorInfo {
+      max-width: 1320px;
+      margin: 3rem auto 6rem;
+      text-align: center;
+      font-style: italic;
+      color: #4d7d4d;
+      font-size: 1rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeSlideInUp 1s ease forwards;
+      animation-delay: 5s;
+      user-select: none;
+    }
+    @keyframes fadeSlideIn {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    @keyframes fadeSlideInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeInText {
+      to {
+        opacity: 1;
+      }
+    }
+    @media (max-width: 1024px) {
+      .Container {
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+      }
+      .imgContainer,
+      .textSide {
+        width: 100%;
+        max-width: 600px;
+        text-align: center;
+      }
+      .mainImg {
+        height: 400px;
+        transform: none !important;
+      }
+      .blueDots {
+        display: none;
+      }
+      .heading {
+        font-size: 2.5rem;
+        border-bottom: 2px solid #7aaa7a;
+      }
+    }
+    @media (max-width: 500px) {
+      .mainImg {
+        height: 250px;
+      }
+      .explore {
+        width: 100%;
+        padding: 16px 0;
+        font-size: 1rem;
+      }
+      .textSide {
+        padding: 1.5rem 2rem;
+      }
+    }
+    .back-home-btn {
+  position: fixed;
+  top: 20px;
+  left: 25px;
+  z-index: 999;
+  background: linear-gradient(45deg, #7aaa7a, #6ea46e);
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 30px;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(122, 170, 122, 0.5);
+  transition: all 0.3s ease;
+}
+
+.back-home-btn:hover {
+  background: linear-gradient(45deg, #629962, #91b291);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(122, 170, 122, 0.7);
+}
+
+    html, body, * {
+  cursor: url("../assets/icons8-cursor-32.png"), auto !important;
+}
+*::before,
+*::after {
+  cursor: url("../assets/icons8-cursor-32.png"), auto !important;
+}
+  </style>
+</head>
+<body>
+  <a href="homepage.html" class="back-home-btn" role="button" aria-label="Go back to homepage">← Home</a>
+  <section class="responsive-container-block bigContainer" aria-label="Introduction to Apna Adda">
+    <div class="responsive-container-block Container" id="introSection">
+      <div class="imgContainer" id="imgContainer" aria-hidden="true" tabindex="-1">
+        <img
+          class="blueDots"
+          src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/aw3.svg"
+          alt=""
+          aria-hidden="true"
+          tabindex="-1"
+          style="filter: drop-shadow(0 0 8px #7aaa7a) brightness(1.2) saturate(1.5);"
+        />
+        <img
+          class="mainImg"
+          src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/aw2.svg"
+          alt="Modern Apartment building exterior with glass balconies"
+          tabindex="0"
+        />
+      </div>
+      <div class="responsive-container-block textSide" id="textSide" role="region" aria-labelledby="introHeading">
+        <h1 class="heading" id="introHeading" tabindex="0"></h1>
+        <p class="subHeading" tabindex="0">
+          Apna Adda is your trusted partner for finding and listing properties across India.
+          Whether you're looking to rent, buy, or sell flats, apartments, or commercial spaces,
+          we've got you covered with the latest listings and reliable information.
+        </p>
+        <p class="subHeading" tabindex="0">
+          Explore thousands of verified properties, connect with trusted owners and agents,
+          and make your dream home or office a reality.
+        </p>
+        <a href="https://siddharthcreates.vercel.app/" class="explore" role="button" aria-label="Visit portfolio" target="_blank" rel="noopener noreferrer">Visit Portfolio</a>
+      </div>
+    </div>
+  </section>
+  <footer class="creatorInfo" id="creatorInfo" aria-label="Creator Information" tabindex="0">
+    Created with by <strong>Siddharth Goutam Kumar</strong>
+  </footer>
+  <script>
+    function revealOnScroll() {
+      const textSide = document.getElementById('textSide');
+      const creatorInfo = document.getElementById('creatorInfo');
+      const windowHeight = window.innerHeight;
+      if (textSide.getBoundingClientRect().top < windowHeight * 0.85) {
+        textSide.classList.add('visible');
+      }
+      if (creatorInfo.getBoundingClientRect().top < windowHeight * 0.85) {
+        creatorInfo.style.opacity = '1';
+        creatorInfo.style.transform = 'translateY(0)';
+      }
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', () => {
+      document.getElementById('textSide').classList.add('visible');
+      revealOnScroll();
+    });
+    const imgContainer = document.getElementById('imgContainer');
+    const blueDots = imgContainer.querySelector('.blueDots');
+    imgContainer.addEventListener('mousemove', e => {
+      const rect = imgContainer.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      const maxTranslate = 20;
+      blueDots.style.transform = `translate3d(${(x - 0.5) * maxTranslate}px, ${(y - 0.5) * maxTranslate}px, 0)`;
+    });
+    imgContainer.addEventListener('mouseleave', () => {
+      blueDots.style.transform = 'translate3d(0,0,0)';
+    });
+    const heading = document.getElementById('introHeading');
+    const headingText = "Welcome to Apna Adda";
+    let index = 0;
+    function typeHeading() {
+      if (index < headingText.length) {
+        heading.textContent += headingText.charAt(index);
+        index++;
+        setTimeout(typeHeading, 100);
+      } else {
+        heading.setAttribute('tabindex', '0');
+        heading.focus();
+        document.getElementById('textSide').classList.add('visible');
+      }
+    }
+    window.addEventListener('load', () => {
+      heading.textContent = "";
+      typeHeading();
+    });
+  </script>
+</body>
+</html>

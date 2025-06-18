@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register Page</title>
+  <script src="../databases/db.js"></script>
+  <link rel="shortcut icon" href="../assets/user.png" type="image/x-icon">
+  <style>
+    body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #98c79c;
+  font-family: "Segoe UI", sans-serif;
+  height: 100%;
+}
+
+.outer-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  background-color: #fdfaf4;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  display: flex;
+  padding: 2rem;
+  width: 950px;
+  max-width: 95%;
+}
+
+.form-section {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 370px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-section h2 {
+  font-size: 24px;
+  margin-bottom: 0.5rem;
+}
+
+.form-section p {
+  font-size: 14px;
+  color: #444;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.forgot {
+  font-size: 12px;
+  margin-bottom: 1rem;
+}
+
+.forgot a {
+  font-weight: bold;
+  color: #000;
+  text-decoration: none;
+}
+
+.sign-in-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #aed6b3;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 1.2rem;
+}
+
+.or {
+  font-size: 13px;
+  color: #666;
+  margin: 1rem 0;
+}
+
+.socials {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
+  flex-wrap: nowrap;
+}
+
+.socials .social {
+  flex: 1;
+  min-width: 0;
+  padding: 0.6rem;
+  border: 1px solid #000;
+  border-radius: 8px;
+  background-color: white;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.bottom-text {
+  font-size: 13px;
+  color: #444;
+}
+
+.bottom-text a {
+  font-weight: bold;
+  text-decoration: none;
+  color: #000;
+}
+
+.image-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-section img {
+  max-width: 90%;
+  height: auto;
+}
+
+input.error {
+  border: 1px solid red;
+  background-color: #fff4f4;
+}
+
+#form-errors {
+  line-height: 1.4;
+}
+html, body, * {
+  cursor: url("../assets/icons8-cursor-32.png"), auto !important;
+}
+
+*::before,
+*::after {
+  cursor: url("../assets/icons8-cursor-32.png"), auto !important;
+}
+
+
+  </style>
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector("form");
+    const errorDiv = document.getElementById("form-errors");
+
+    form.addEventListener("submit", function (e) {
+      const usernameInput = form.querySelector('input[name="username"]');
+      const emailInput = form.querySelector('input[name="email"]');
+      const passwordInput = form.querySelector('input[name="password"]');
+
+      const username = usernameInput.value.trim();
+      const emailOrPhone = emailInput.value.trim();
+      const password = passwordInput.value.trim();
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const phoneRegex = /^\d{10}$/;
+
+      let errors = [];
+
+      // Clear previous error styles
+      [usernameInput, emailInput, passwordInput].forEach(input => {
+        input.classList.remove('error');
+      });
+
+      if (username.length < 3) {
+        errors.push("Username must be at least 3 characters long.");
+        usernameInput.classList.add("error");
+      }
+
+      if (!emailRegex.test(emailOrPhone) && !phoneRegex.test(emailOrPhone)) {
+        errors.push("Enter a valid email or 10-digit phone number.");
+        emailInput.classList.add("error");
+      }
+
+      if (password.length < 6) {
+        errors.push("Password must be at least 6 characters long.");
+        passwordInput.classList.add("error");
+      }
+
+      if (errors.length > 0) {
+        e.preventDefault(); // BLOCK form submission
+        errorDiv.innerHTML = errors.map(err => `<div>• ${err}</div>`).join("");
+      } else {
+        errorDiv.innerHTML = "";
+      }
+    });
+  });
+</script>
+</head>
+<body>
+  <div class="outer-wrapper">
+    <div class="card">
+
+      <!-- Left: Registration Form -->
+     <div class="form-section">
+  <h2>Register</h2>
+  <p>Hey, Enter your details to create<br />your account</p>
+
+  <form action="/register" method="post">
+    <input type="text" placeholder="Username" name="username" required />
+    <input type="text" placeholder="Email / Phone No" name="email" required />
+    <input type="password" placeholder="Create Passcode" name="password" required />
+
+    <small class="forgot">Already have an account? <a href="./login.html">Sign in!</a></small>
+
+    <button type="submit" class="sign-in-btn">Register</button>
+
+    <div class="or">— Or Sign up with —</div>
+
+    <div class="socials">
+      <button type="button" class="social">Google</button>
+      <button type="button" class="social">Apple ID</button>
+      <button type="button" class="social">Facebook</button>
+    </div>
+    <div id="form-errors" style="color: red; font-size: 13px; margin-top: -10px; margin-bottom: 10px;"></div>
+  </form>
+
+  <p class="bottom-text">Already have an account? <a href="login.html">Sign in</a></p>
+</div>
+
+      <!-- Right: Illustration -->
+      <div class="image-section">
+        <img src="./image.png" alt="Illustration" />
+      </div>
+
+    </div>
+    <button onclick="history.back()" 
+  onmouseover="this.style.backgroundColor='#a0ccaa'" 
+  onmouseout="this.style.backgroundColor='#b5ddb9'"
+  style="
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 0.5rem 1rem;
+    background-color: #b5ddb9;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+">
+  ← Back
+</button>
+
+  </div>
+</body>
+</html>

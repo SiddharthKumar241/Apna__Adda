@@ -306,6 +306,84 @@
     }
   });
   </script>
+    <!-- Chatbot widget -->
+<div id="chatbot-widget">
+  <div id="chat-toggle-wrapper">
+    <button id="chat-toggle">💬</button>
+    <div id="chat-tooltip">Ask about Apna Adda</div>
+  </div>
+
+  <div id="chatbox-panel">
+    <div id="chatbox-header">Apna Adda AI Assistant</div>
+    <div id="chatbox">
+      <p><strong>Apna Adda AI:</strong> Hi! Ask me anything about renting, listings, or documents.</p>
+    </div>
+    <div id="chat-input-area">
+      <input id="userInput" type="text" placeholder="Type your question..." />
+      <button id="sendBtn">Send</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const chatboxPanel = document.getElementById("chatbox-panel");
+  const toggleButton = document.getElementById("chat-toggle");
+  const userInput = document.getElementById("userInput");
+  const sendBtn = document.getElementById("sendBtn");
+  const chatbox = document.getElementById("chatbox");
+
+  toggleButton.addEventListener("click", () => {
+    if (chatboxPanel.style.display === "flex") {
+      chatboxPanel.style.display = "none";
+    } else {
+      chatboxPanel.style.display = "flex";
+      userInput.focus();
+    }
+  });
+
+  sendBtn.addEventListener("click", sendMessage);
+
+  userInput.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+      sendMessage();
+    }
+  });
+
+  function appendMessage(sender, text, isUser = false) {
+    const message = document.createElement("p");
+    message.innerHTML = `<strong>${sender}:</strong> ${text}`;
+    message.style.color = isUser ? "#333" : "#007f5f";
+    chatbox.appendChild(message);
+    chatbox.scrollTop = chatbox.scrollHeight;
+  }
+
+  async function sendMessage() {
+    const input = userInput.value.trim();
+    if (!input) return;
+
+    appendMessage("You", input, true);
+    userInput.value = "";
+    userInput.disabled = true;
+    sendBtn.disabled = true;
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: input })
+      });
+
+      const data = await response.json();
+      appendMessage("Apna Adda AI", data.reply || "No response.");
+    } catch (err) {
+      appendMessage("Apna Adda AI", "Error contacting AI assistant.");
+    }
+
+    userInput.disabled = false;
+    sendBtn.disabled = false;
+    userInput.focus();
+  }
+</script>
 
 </body>
 

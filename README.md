@@ -81,6 +81,7 @@ A full-stack house rent/buy listing platform built with **Node.js**, **Express**
 | GET    | `/freehold-property`        | Fetch DB freehold listings                                     |
 | GET    | `/industrial-plots`         | Fetch DB industrial plots                                      |
 | GET    | `/flats-apartments`         | Fetch DB flats & apartments                                    |
+| POST    | `/api/chat`                | Chat with Apna Adda AI assistant                                |
 
 ---
 

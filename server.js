@@ -153,18 +153,9 @@ app.post('/api/chat', async (req, res) => {
   const greetings = ['hi', 'hello', 'hola', 'hey', 'namaste', 'good morning', 'good evening', 'kaise ho'];
   if (greetings.some(greet => message.toLowerCase().includes(greet))) {
     return res.json({
-      reply: `Yo, Apna Adda, bhai! 🏡🔥
-AI hoon, ghar ka raja, no koi hai chai! 😎
-Ghar chahiye ya sapne ka drama?
-Bol, warna roast kar du tera tamaasha! 😜
-
-Hindi masti, English swag ka josh,
-Ethical vibes, no bakwas, full tosh! 💪
-Budget bol, ya pocket khali hai?
-Sawaal daal, ghar launga, bhai! 🏠
-
-Jaldi type, kya hai plan?
-Dream home shuru, abhi, full on! 🚀`
+      reply: ` Yo, Apna Adda, bhai! 🏡🔥 AI hoon, ghar ka raja, no koi hai chai! 😎 Ghar chahiye ya sapne ka drama? Bol, warna roast kar du tera tamaasha! 😜
+      Hindi masti, English swag ka josh, Ethical vibes, no bakwas, full tosh! 💪 Budget bol, ya pocket khali hai? Sawaal daal, ghar launga, bhai! 🏠 Jaldi type,
+      kya hai plan? Dream home shuru, abhi, full on! 🚀`
     });
   }
 

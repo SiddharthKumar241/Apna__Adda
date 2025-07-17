@@ -153,9 +153,18 @@ app.post('/api/chat', async (req, res) => {
   const greetings = ['hi', 'hello', 'hola', 'hey', 'namaste', 'good morning', 'good evening', 'kaise ho'];
   if (greetings.some(greet => message.toLowerCase().includes(greet))) {
     return res.json({
-      reply: ` Yo, Apna Adda, bhai! 🏡🔥 AI hoon, ghar ka raja, no koi hai chai! 😎 Ghar chahiye ya sapne ka drama? Bol, warna roast kar du tera tamaasha! 😜
-      Hindi masti, English swag ka josh, Ethical vibes, no bakwas, full tosh! 💪 Budget bol, ya pocket khali hai? Sawaal daal, ghar launga, bhai! 🏠 Jaldi type,
-      kya hai plan? Dream home shuru, abhi, full on! 🚀`
+      reply: ` Yo, welcome to Apna Adda! 🏡🔥
+Main hoon tera AI dost – smart, savage, aur full desi toast! 😎
+Flat chahiye, villa ka scene ho ya rental ka dream –
+Bas bol kya chahiye, warna kar dun Tera budget meme! 😂
+
+Hindi masti + English swag = perfect jod! 💬
+No fake talk, sirf real estate ka solid road. 💪
+Tera budget low ho ya sapne high,
+Main hoon ready – just type kar bhai! 📲
+
+Soch mat, bol kya plan hai?
+Ghar ka jugaad ab hoga AI ke dhan se! 🚀`
     });
   }
 

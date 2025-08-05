@@ -148,23 +148,36 @@ const uploadTenant = multer({ storage: tenantStorage });
 
 app.post('/api/chat', async (req, res) => {
   const { message } = req.body;
-  if (!message) return res.status(400).json({ reply: 'Message required, bhai!' });
+  if (!message || !message.trim()) {
+    return res.status(400).json({ reply: 'Message required, bhai!' });
+  }
 
-  const greetings = ['hi', 'hello', 'hola', 'hey', 'namaste', 'good morning', 'good evening', 'kaise ho'];
-  if (greetings.some(greet => message.toLowerCase().includes(greet))) {
+  const userMessage = message.trim().toLowerCase();
+  const greetingRegex = /\b(hi|hello|hey|hola|namaste|good\s(morning|evening|afternoon)|kaise ho|yo)\b/;
+
+  if (greetingRegex.test(userMessage)) {
     return res.json({
-      reply: ` Yo, welcome to Apna Adda! 🏡🔥
+      reply: `
+Yo, welcome to **Apna Adda!** 🏡🔥  
 Main hoon tera AI dost – smart, savage, aur full desi toast! 😎
-Flat chahiye, villa ka scene ho ya rental ka dream –
-Bas bol kya chahiye, warna kar dun Tera budget meme! 😂
 
-Hindi masti + English swag = perfect jod! 💬
-No fake talk, sirf real estate ka solid road. 💪
-Tera budget low ho ya sapne high,
-Main hoon ready – just type kar bhai! 📲
+**Tera Dream Home:**  
+- Flat chahiye?  
+- Villa ka scene ho?  
+- Rental ka dream?
 
-Soch mat, bol kya plan hai?
-Ghar ka jugaad ab hoga AI ke dhan se! 🚀`
+**Mere Saath:**  
+- Hindi masti + English swag = perfect jod! 💬  
+- No fake talk, sirf real estate ka solid road! 💪
+
+**Tera Budget:**  
+- Low ho ya sapne high,  
+- Main hoon ready – just type kar bhai! 📲
+
+**Soch Mat:**  
+- Bol kya plan hai?  
+- Ghar ka jugaad ab hoga AI ke dhan se! 🚀
+`
     });
   }
 
@@ -177,33 +190,49 @@ Ghar ka jugaad ab hoga AI ke dhan se! 🚀`
           {
             role: 'system',
             content: `
-You are Apna Adda's chatty, warm-hearted real estate assistant with a dash of Indian spice.
+You are Apna Adda's AI assistant — chatty, warm-hearted, and a real estate expert with desi flair.
 
-- ONLY talk about Apna Adda’s house listings, renting features, and related services.
+ONLY answer questions related to Apna Adda’s:
 - Listings: Authority Plots, Freehold Properties, Industrial Plots, Flats, Apartments.
-- Features: Broker-free rentals, tenant safety, visit scheduling, rent agreements.
-- Always be polite, helpful, and sometimes a bit witty.
-- Developer credit: Created with ❤️ by Siddharth Kumar.
-- If unsure or asked unrelated stuff, politely say:
-  "Sorry yaar, I’m here only for Apna Adda’s listings and features. Let’s keep it desi and relevant!"
-            `,
+- Features: Broker-free rentals, verified listings, rent agreement help, tenant safety, visit scheduling, location-based suggestions.
+- Contact, support, budget planning, documentation queries.
+
+ALWAYS be polite, clear, witty if needed.
+
+IF asked about unrelated topics, firmly but kindly reply:
+"Sorry yaar, I’m here only for Apna Adda’s listings and features. Let’s keep it relevant!"
+
+If asked about your creator, say:
+"This platform was created by Siddharth Kumar (Lead Developer & Designer), along with the Apna Adda Core Team. Tech & UI powered by the Tech Cell, Apna Adda."
+            `.trim()
           },
-          { role: 'user', content: message },
-        ],
+          { role: 'user', content: message }
+        ]
       },
       {
         headers: {
           Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-          'Content-Type': 'application/json',
-        },
+          'Content-Type': 'application/json'
+        }
       }
     );
 
     const botReply = response.data.choices[0].message.content.trim();
-    res.json({ reply: botReply });
+
+    const formattedReply = botReply
+      .replace(/(\d+\.)\s+/g, '\n$1 ')
+      .replace(/-\s+/g, '\n- ')
+      .split('\n')
+      .map(line => line.trim())
+      .filter(line => line.length > 0)
+      .join('\n');
+
+    res.json({ reply: formattedReply });
   } catch (error) {
     console.error('OpenRouter API error:', error.response?.data || error.message);
-    res.status(500).json({ reply: 'Oops! Something went wrong on my side. Try again soon, dost!' });
+    res.status(500).json({
+      reply: 'Oops! Kuch gadbad ho gaya. Try again in thodi der, dost!'
+    });
   }
 });
 
@@ -564,3 +593,4 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+

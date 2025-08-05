@@ -887,6 +887,19 @@ hero .hero-image img {
 #sendBtn:hover {
   background: #7fbf7f;
 }
+#voiceBtn {
+  background: #98c79c;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#voiceBtn:hover {
+  background: #7fbf7f;
+}
 .video-wrapper {
   width: 100%;
   max-width: 100%;
@@ -897,6 +910,7 @@ hero .hero-image img {
   padding: 1rem;
   box-sizing: border-box;
 }
+
 
 .video-responsive {
   width: 60vw;
@@ -914,3 +928,4 @@ html, body, * {
 *::after {
   cursor: url("../assets/icons8-cursor-32.png"), auto !important;
 }
+

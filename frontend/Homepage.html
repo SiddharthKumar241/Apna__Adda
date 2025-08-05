@@ -320,8 +320,9 @@
       <p><strong>Apna Adda AI:</strong> Hi! Ask me anything about renting, listings, or documents.</p>
     </div>
     <div id="chat-input-area">
-      <input id="userInput" type="text" placeholder="Type your question..." />
-      <button id="sendBtn">Send</button>
+    <input id="userInput" type="text" placeholder="Type your question..." />
+    <button id="voiceBtn">🎤</button>
+    <button id="sendBtn">Send</button>
     </div>
   </div>
 </div>
@@ -385,7 +386,45 @@
     userInput.focus();
   }
 </script>
+<script>
+  const voiceBtn = document.getElementById("voiceBtn");
+
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const recognition = SpeechRecognition ? new SpeechRecognition() : null;
+
+  if (recognition) {
+    recognition.lang = 'en-IN';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    voiceBtn.addEventListener("click", () => {
+      voiceBtn.innerText = "🎙️";
+      recognition.start();
+    });
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      userInput.value = transcript;
+      sendMessage(); // auto-send
+      voiceBtn.innerText = "🎤";
+    };
+
+    recognition.onerror = (event) => {
+      console.error("Speech recognition error:", event.error);
+      voiceBtn.innerText = "❌";
+      setTimeout(() => voiceBtn.innerText = "🎤", 1500);
+    };
+
+    recognition.onend = () => {
+      voiceBtn.innerText = "🎤";
+    };
+  } else {
+    voiceBtn.disabled = true;
+    voiceBtn.title = "Voice input not supported";
+  }
+</script>
 
 </body>
 
 </html>
+

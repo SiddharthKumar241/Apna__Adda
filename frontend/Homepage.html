@@ -2,23 +2,86 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Apna_Adda</title>
-  <link rel="stylesheet" href="Homepage.css" />
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Siddharth Goutam Kumar" />
+  <meta name="description" content="Apna Adda — A modern community housing and rental platform connecting tenants and property owners securely and conveniently." />
+  <meta name="keywords" content="Apna Adda, Housing Platform, Rental Platform, Tenant Registration, Property Listings, Roommates, Flat Rentals, Real Estate, Siddharth Kumar, VIT Project, Web App" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://apnaadda.tech/" />
+
+  <!-- Title -->
+  <title>Apna Adda | Housing & Rental Platform | Connect Tenants & Owners</title>
+
+  <!-- Open Graph (Facebook, LinkedIn) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://apnaadda.tech/" />
+  <meta property="og:title" content="Apna Adda | Community Housing & Rentals" />
+  <meta property="og:description" content="Find your ideal home or tenant with Apna Adda — a smart housing and rental solution built for communities." />
+  <meta property="og:image" content="https://apnaadda.tech/assets/Homepage.png" />
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://apnaadda.tech/" />
+  <meta name="twitter:title" content="Apna Adda | Smart Housing & Rentals" />
+  <meta name="twitter:description" content="Apna Adda connects tenants and property owners for a seamless housing experience." />
+  <meta name="twitter:image" content="https://apnaadda.tech/assets/Homepage.png" />
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Apna Adda",
+    "url": "https://apnaadda.tech",
+    "image": "https://apnaadda.tech/assets/Homepage.png",
+    "description": "A modern housing and rental platform connecting tenants and owners.",
+    "creator": {
+      "@type": "Person",
+      "name": "Siddharth Goutam Kumar",
+      "url": "https://siddharthkumar.tech"
+    },
+    "applicationCategory": "Real Estate",
+    "operatingSystem": "All",
+    "sameAs": [
+      "https://www.linkedin.com/in/siddharth-goutam-kumar-921ab928a/",
+      "https://github.com/SiddharthKumar241"
+    ]
+  }
+  </script>
+
+  <!-- Favicon and Apple Touch -->
+  <link rel="icon" href="../assets/Homepage.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="../assets/Homepage.png" />
+  <link rel="shortcut icon" href="../assets/Homepage.png" type="image/png" />
+
+  <!-- Fonts and Animations -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="shortcut icon" href="../assets/Homepage.png" type="image/x-icon">
+  <link rel="stylesheet" href="Homepage.css" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2VKBKXVGBV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2VKBKXVGBV');
+  </script>
+
+  <!-- FAQ Toggle Script -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const faqItems = document.querySelectorAll('.faq-item');
-
       faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
-
         question.addEventListener('click', () => {
           item.classList.toggle('active');
         });
-
         question.addEventListener('mouseleave', () => {
           item.classList.remove('active');
         });
@@ -26,6 +89,7 @@
     });
   </script>
 </head>
+
 
 <body>
   <header>
@@ -427,4 +491,5 @@
 </body>
 
 </html>
+
 

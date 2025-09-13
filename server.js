@@ -29,6 +29,12 @@ const uploadTenantDir = path.join(__dirname, 'uploads', 'tenant');
 if (!fs.existsSync(uploadOwnershipDir)) fs.mkdirSync(uploadOwnershipDir, { recursive: true });
 if (!fs.existsSync(uploadTenantDir)) fs.mkdirSync(uploadTenantDir, { recursive: true });
 
+const path = require('path');
+app.get('/BingSiteAuth.xml', (req, res) => {
+  res.sendFile(path.join(__dirname, 'BingSiteAuth.xml'));
+});
+
+
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -593,4 +599,5 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
 
